@@ -1,0 +1,69 @@
+.img-login{
+    max-width: 600px;
+    width: 90%;
+    max-height: 500px!important;
+}
+
+.titulo-login {
+    color: #F44829;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.column-login{
+    background-image: linear-gradient(180deg, #f77525 10%, #f22a2a 95%);
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #fff;
+}
+
+.column-logo {
+    display: none!important;
+}
+
+@media(min-width: 600px) {
+    .column-logo {
+        display: flex!important;
+        flex: 2;
+        justify-content: center;
+        align-items: center;
+    }    
+}
+
+@media(min-width: 750px){ 
+    .column-logo {
+        flex: 3;
+    }
+}
+
+@media(min-width: 850px){
+    .column-logo {
+        flex: 5;
+    }
+}
+
+.h-100v {
+    height: 100vh;
+}
+.fw-bold{
+    font-weight: bold;
+}
+.btn-login {
+    background-color: #F4622D;
+    color: white;
+    font-weight: bold;
+}
+
+.img-login-2 {
+    max-width: 180px;
+    width: 95%;
+}
+
+.d-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

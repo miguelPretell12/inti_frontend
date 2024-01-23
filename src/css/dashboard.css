@@ -1,0 +1,5 @@
+.bg-gradiente-dash {
+    background-color: #FFD37E;
+    background-image: linear-gradient(180deg, #f77525 10%, #e81919 95%);
+    background-size: cover;
+}
