@@ -31,7 +31,7 @@
     width: 100%!important;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 650px) {
     .grid-column-2 {
         grid-template-columns: 50% 50%;
         gap: 10px;
@@ -46,3 +46,6 @@
     margin-bottom: 10px;
 }
 
+.w-30 {
+    width: 30%;
+}

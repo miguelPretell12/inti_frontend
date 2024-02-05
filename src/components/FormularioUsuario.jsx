@@ -4,64 +4,55 @@ import Button from 'react-bootstrap/Button';
 import useInventario from '../hooks/useInventario';
 
 const FormularioUsuario = ({  }) => {
-    const { guardarUsuario, getPerfils,perfils, handleClose } = useInventario()
-    const [nombre, setNombre] = useState('')
-    const [apellido, setApellido] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [perfil, setPerfil] = useState('')
-    const [estado, setEstado] = useState(true)
-
+    const { handleCloseUsuario,editarUsuario, limpiarUsuario, usuario,guardarUsuario, getPerfils,perfils, handleClose, handleChangeUsuario } = useInventario()
     useEffect(()=> {
         getPerfils()
     },[])
 
+    const {_id, nombre, apellido, email, password, perfil, estado} = usuario
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        guardarUsuario({
-            nombre
-            , apellido
-            , email
-            , password
-            , perfil
-            , estado
-        })
 
+        if(_id == '') {
+            delete usuario._id
+            guardarUsuario(usuario)
+        } else {
+            editarUsuario(usuario)
+        }
+        
         // limpiar campo despues de guardar
-        setNombre('')
-        setApellido('')
-        setPassword('')
-        setPerfil('')
-        setEstado('')
-        setEstado('')
-
+        limpiarUsuario()
         // Cerrar modal
         handleClose()
     }
+
+    
 
     return (
         <>
             <form onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlFor="nombres">Nombres:</label>
-                    <input type="text" className='form-control' onChange={(e) => setNombre(e.target.value)} value={nombre} />
+                    <input type="text" className='form-control' name='nombre' onChange={handleChangeUsuario} value={nombre} />
                 </div>
                 <div className='mb-3'>
                     <label htmlFor="apellido">Apellidos:</label>
-                    <input type="text" className='form-control' onChange={(e) => setApellido(e.target.value)} value={apellido} />
+                    <input type="text" className='form-control' name='apellido' onChange={handleChangeUsuario} value={apellido} />
                 </div>
                 <div className='mb-3'>
                     <label htmlFor="email">E-mail:</label>
-                    <input type="email" className='form-control' onChange={(e) => setEmail(e.target.value)} value={email} />
+                    <input type="email" className='form-control' name='email' onChange={handleChangeUsuario} value={email} />
                 </div>
-                <div className='mb-3'>
+                <div className={`${_id==''?'d-block':'d-none' } mb-3`}>
                     <label htmlFor="contrasenia">Contraseña:</label>
-                    <input type="password" className='form-control' onChange={(e) => setPassword(e.target.value)} value={password} />
+                    <input type="password" className='form-control' name='password' onChange={handleChangeUsuario} value={password} />
                 </div>
                 <div className='mb-3'>
                     <label htmlFor="">Perfil:</label>
                     <select  className='form-control'
-                        onChange={e => setPerfil(e.target.value)}
+                        name='perfil'
+                        onChange={handleChangeUsuario}
                         value={perfil}
                     >
                         <option value="">--seleccionar--</option>
@@ -73,8 +64,9 @@ const FormularioUsuario = ({  }) => {
                 <div>
                     <label htmlFor="">Estado:</label>
                     <select className='form-control'
-                        onChange={e => setEstado(e.target.value)}
-                        value={estado}
+                        onChange={handleChangeUsuario}
+                        value={estado? '1':'0'}
+                        name='estado'
                     >
                         <option value="">--seleccionar--</option>
                         <option value="1">Activo</option>
@@ -83,8 +75,9 @@ const FormularioUsuario = ({  }) => {
                 </div>
                 <div className='modal-footer'>
                     <button
+                        type='button'
                         className='btn btn-secondary'
-                        onClick={handleClose}
+                        onClick={handleCloseUsuario}
                     >
                         Cerrar    
                     </button>  
@@ -92,7 +85,7 @@ const FormularioUsuario = ({  }) => {
                         type='submit'
                         className='btn btn-primary'
                     >
-                        Guardar
+                        {_id==''?'Guardar Usuario':'Editar Usuario'}
                     </button>  
                 </div>
             </form>
