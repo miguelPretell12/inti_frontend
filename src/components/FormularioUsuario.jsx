@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import useInventario from '../hooks/useInventario';
 
-const FormularioUsuario = ({  }) => {
-    const { handleCloseUsuario,editarUsuario, limpiarUsuario, usuario,guardarUsuario, getPerfils,perfils, handleClose, handleChangeUsuario } = useInventario()
+const FormularioUsuario = ({ tipo = 0, supervisor="" }) => {
+    const {handleCloseColaborador,guardarUsuarioColaborador, handleCloseUsuario,editarUsuario, limpiarUsuario, usuario,guardarUsuario, getPerfils,perfils, handleClose, handleChangeUsuario } = useInventario()
     useEffect(()=> {
         getPerfils()
     },[])
@@ -14,17 +14,27 @@ const FormularioUsuario = ({  }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(_id == '') {
-            delete usuario._id
-            guardarUsuario(usuario)
-        } else {
-            editarUsuario(usuario)
+        if(tipo == 0) {
+            if(_id == '') {
+                delete usuario._id
+                guardarUsuario(usuario)
+            } else {
+                editarUsuario(usuario)
+            }
+            
+            // limpiar campo despues de guardar
+            limpiarUsuario()
+            // Cerrar modal
+            handleClose()
         }
-        
-        // limpiar campo despues de guardar
-        limpiarUsuario()
-        // Cerrar modal
-        handleClose()
+        if(tipo == 1){
+            usuario.supervisor = supervisor            
+            delete usuario._id
+            guardarUsuarioColaborador(usuario)
+
+            limpiarUsuario()
+            handleCloseColaborador()
+        }
     }
 
     

@@ -72,6 +72,18 @@ const InventarioProvider = ({children}) => {
 
     }
 
+    const guardarUsuarioColaborador = async (usuario) => {
+        try {
+            const {data} = await clienteAxios.post('/usuarios/crear-colaborador', usuario)
+            //setUsuario(data)
+            setUsuarios([...usuarios, data])
+            
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
     const getPerfils = async () => {
         try {
             const {data} = await clienteAxios.get("/perfil/listar-perfil")
@@ -204,6 +216,7 @@ const InventarioProvider = ({children}) => {
             editarUsuario,
             handleCloseColaborador,
             handleShowColaborador,
+            guardarUsuarioColaborador,
             showColaborador,
             perfils,
             show,

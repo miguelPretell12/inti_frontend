@@ -16,10 +16,16 @@ const ViewUsuarios = () => {
   const { showColaborador, handleCloseUsuario, usuarios, show, handleClose, handleShow, getUsuarios, getUsuario, usuario, handleCloseColaborador,
     handleShowColaborador } = useInventario()
   const [buscar, setBuscar] = useState('')
+  const [supervisor, setSupervisor] = useState('')
   const [filterData, setFilterData] = useState([]);
   useEffect(() => {
     getUsuarios()
   }, [])
+
+  const handleShowColaCrear = (idsupervisor) => {
+    handleShowColaborador()
+    setSupervisor(idsupervisor)
+  }
 
   const columns = [
     {
@@ -49,7 +55,7 @@ const ViewUsuarios = () => {
           <button className='btn btn-warning m-1' onClick={()=>getUsuario(row._id)} >
             <FaEdit />
           </button>
-          <button type='button' className='btn btn-primary m-1' onClick={()=>handleShowColaborador()}>
+          <button type='button' className='btn btn-primary m-1' onClick={()=>handleShowColaCrear(row._id)}>
             <FiUserPlus />
           </button> 
         </div>
@@ -63,27 +69,6 @@ const ViewUsuarios = () => {
     selectAllRowsItem: true,
     selectAllRowsItemText: 'Todos',
   };
-
-  // Se penso eliminar los usuarios, pero eso generaria un conflicto
-  const handleEliminar = id => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted." + id,
-          icon: "success"
-        });
-      }
-    });
-  }
 
   const handleBuscar = () => {
     if(buscar != "") {
@@ -149,8 +134,8 @@ const ViewUsuarios = () => {
           <div>
             <p>Si requieres crear un colaborador para que tenga un control en las ventas, solo crea un usuario</p>
             <hr />
-            <div className='d-block'>
-              <FormularioUsuario />
+            <div className='d-block'> 
+              <FormularioUsuario tipo={1} supervisor={supervisor} />
             </div>
           </div>
         </Modal.Body>
