@@ -37,7 +37,7 @@ const FormularioUsuario = ({ tipo = 0, supervisor="" }) => {
         }
     }
 
-    
+    const perfilesFiltrados = tipo === 1 ? perfils.filter(perfil => perfil.codigo !== 'ADMIN' && perfil.habilitado === true) : perfils.filter(perfil => perfil.habilitado === true);
 
     return (
         <>
@@ -67,7 +67,7 @@ const FormularioUsuario = ({ tipo = 0, supervisor="" }) => {
                     >
                         <option value="">--seleccionar--</option>
                         {
-                            perfils.map(perfil => <option key={perfil._id} value={perfil._id}>{perfil.nombre}</option>)
+                            perfilesFiltrados.map(perfil => (<option key={perfil._id} value={perfil._id}>{perfil.nombre}</option>))
                         }
                     </select>
                 </div>

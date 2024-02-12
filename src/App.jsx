@@ -17,7 +17,7 @@ function App() {
       <InventarioProvider>
         <Routes>
           <Route path="/" element={<AccesoLayout />}>
-            <Route path="login" index element={<Login />} />
+            <Route index element={<Login />} />
             <Route path='olvide-password' element={<RecuperarContraseña />} />
             <Route path='olvide-password/:token' element={<ConfirmarContraseña />} />
             <Route path='confirmar-cuenta/:token' element={<ConfirmarCuenta />} />

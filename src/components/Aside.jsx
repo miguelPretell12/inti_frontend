@@ -31,14 +31,13 @@ const Aside = () => {
                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <i className="fas fa-fw fa-cog"></i>
-                        <span>Components</span>
+                        <span>Componentes</span>
                     </a>
                     <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
-                            <h6 className="collapse-header">Custom Components:</h6>
+                            {/* <h6 className="collapse-header">Custom Components:</h6> */}
                             <Link className="collapse-item" to="/dashboard/usuarios">Usuarios</Link>
-                            {/* <a className="collapse-item" href="buttons.html">Usuarios</a> */}
-                            <a className="collapse-item" href="cards.html">Cards</a>
+                            {/* <a className="collapse-item" href="cards.html">Cards</a> */}
                         </div>
                     </div>
                 </li>

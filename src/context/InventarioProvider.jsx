@@ -22,8 +22,12 @@ const InventarioProvider = ({children}) => {
         estado:true
         //,encargado: []
     })
+
+    const [colaboradores, setColaboradores] = useState([]);
+
     const [show, setShow] = useState(false);
     const [showColaborador, setShowColaborador] = useState(false);
+    const [showVisColaborador, setShowVisColaborador] = useState(false);
     const [alerta, setAlerta] = useState({msg:'',error:false})
 
     const handleClose = () => setShow(false);
@@ -32,6 +36,9 @@ const InventarioProvider = ({children}) => {
     const handleCloseColaborador = () => setShowColaborador(false);
     const handleShowColaborador = () => setShowColaborador(true);
 
+    const handleCloseVisColaborador = () => setShowVisColaborador(false);
+    const handleShowVisColaborador = () => setShowVisColaborador(true)
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPerfil((prevPerfil) => ({
@@ -194,6 +201,16 @@ const InventarioProvider = ({children}) => {
         setShow(false)
     }
 
+    const obtenerColaboradores = async (id) => {
+        try {
+            const {data} = await clienteAxios.get(`/usuarios/obtener-colaboradores/${id}`)
+            //console.log(data)
+            setColaboradores(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
   return (
     <InventarioContext.Provider 
         value={{
@@ -217,13 +234,18 @@ const InventarioProvider = ({children}) => {
             handleCloseColaborador,
             handleShowColaborador,
             guardarUsuarioColaborador,
+            handleCloseVisColaborador, 
+            handleShowVisColaborador,
+            obtenerColaboradores,
+            showVisColaborador,
             showColaborador,
             perfils,
             show,
             usuarios,
             perfil,
             alerta,
-            usuario
+            usuario,
+            colaboradores
         }}
     > 
         {children}
