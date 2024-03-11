@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../../config/ClienteAxios";
+import apiAxios from "../../config/apiAxios";
 
 const InventarioContext = createContext()
 
@@ -72,7 +73,14 @@ const InventarioProvider = ({children}) => {
             const {data} = await clienteAxios.post('/usuarios/crear', usuario)
             //setUsuario(data)
             setUsuarios([...usuarios, data])
-            
+
+            const UsuarioDB = {
+                idUsuarioMongo: data._id,
+                usuarioCreacion: data.nombre + " " + data.apellido
+            }
+            const  data1 = await apiAxios.post('/Usuarios/Crear', UsuarioDB)
+
+            console.log(data1)
         } catch (error) {
             console.log(error)
         }

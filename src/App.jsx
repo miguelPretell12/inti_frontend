@@ -11,24 +11,29 @@ import IndexDashboard from './pages/IndexDashboard'
 import ViewUsuarios from './pages/usuarios/ViewUsuarios'
 import ViewPerfil from './pages/perfils/ViewPerfil'
 import { InventarioProvider } from './context/InventarioProvider'
+import ViewProductos from './pages/productos/ViewProductos'
+import { AuthProvider } from './context/AuthProvider'
 function App() {
   return (
     <BrowserRouter>
-      <InventarioProvider>
-        <Routes>
-          <Route path="/" element={<AccesoLayout />}>
-            <Route index element={<Login />} />
-            <Route path='olvide-password' element={<RecuperarContraseña />} />
-            <Route path='olvide-password/:token' element={<ConfirmarContraseña />} />
-            <Route path='confirmar-cuenta/:token' element={<ConfirmarCuenta />} />
-          </Route>
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route index element={<IndexDashboard />} />
-            <Route path='usuarios' element={<ViewUsuarios />} />
-            <Route path='perfils' element={<ViewPerfil />} />
-          </Route>
-        </Routes>
-      </InventarioProvider>
+      <AuthProvider>
+        <InventarioProvider>
+          <Routes>
+            <Route path="/" element={<AccesoLayout />}>
+              <Route index element={<Login />} />
+              <Route path='olvide-password' element={<RecuperarContraseña />} />
+              <Route path='olvide-password/:token' element={<ConfirmarContraseña />} />
+              <Route path='confirmar-cuenta/:token' element={<ConfirmarCuenta />} />
+            </Route>
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route index element={<IndexDashboard />} />
+              <Route path='usuarios' element={<ViewUsuarios />} />
+              <Route path='perfils' element={<ViewPerfil />} />
+              <Route path='productos' element={<ViewProductos />} />
+            </Route>
+          </Routes>
+        </InventarioProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
